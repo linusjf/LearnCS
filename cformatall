@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+readarray -t args < <(find . -mindepth 2 -type f -name "*.cs")
+clang-format -i -assume-filename=.clang-format \
+  -style=file -sort-includes \
+  "${args[@]}"
+exit $?
