@@ -16,11 +16,13 @@ declare -i res=0
 proj=$1
 
 set +o noglob
-printf -v findCmd '%q ' find $1 -type f -name '*.cs'
+cd "$proj"
+printf -v findCmd '%q ' find . -type f -name '*.cs'
 readarray -t args < <(eval $findCmd)
 if [ ${#args[@]} -ne 0 ]; then
   csc "${args[@]}"
   res="$?"
 fi
+cd ..
 set -o noglob
 exit "$res"
