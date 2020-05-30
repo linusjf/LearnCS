@@ -1,14 +1,14 @@
 using System;
 using System.Windows.Forms;
 
-public class HelloWorld : Form
+public class HelloWorldWin : Form
 {
     static public void Main ()
     {
-        Application.Run (new HelloWorld ());
+        Application.Run (new HelloWorldWin ());
     }
 
-    public HelloWorld ()
+    public HelloWorldWin ()
     {
         Text = "Hello Mono World";
     }
