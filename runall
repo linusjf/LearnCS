@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+######################################################################
+# @author      : Linus Fernandes (linusfernandes@gmail.com)
+# @file        : runall
+# @created     : Sun May 31, 2020 06:07:08 IST
+# @copyright   : Copyright (c) Linus Fernandes
+# @description : 
+######################################################################
+find . -maxdepth 1 -type d -name "[[:upper:]]*" | \
+  parallel --joblog runj.log -j 5 -I% sh -c 'echo && ./run %'
+exit $?
