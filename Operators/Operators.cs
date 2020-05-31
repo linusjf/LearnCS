@@ -6,6 +6,9 @@ namespace Intro {
       MathOperators();
       LogicalOperators();
       BitWiseOperators();
+      ComparisonOperators();
+      AssignmentOperators();
+      ConditionalOperators();
     }
 
     public static void MathOperators() {
@@ -78,6 +81,58 @@ namespace Intro {
       Console.WriteLine(a << 2);
       // 0000 0001 = 1
       Console.WriteLine(a >> 1);
+    }
+
+    public static void ComparisonOperators() {
+      int x = 10, y = 5;
+      // True
+      Console.WriteLine("x > y : " + (x > y));
+      // False
+      Console.WriteLine("x < y : " + (x < y));
+      // True
+      Console.WriteLine("x >= y : " + (x >= y));
+      // False
+      Console.WriteLine("x <= y : " + (x <= y));
+      // False
+      Console.WriteLine("x == y : " + (x == y));
+      // True
+      Console.WriteLine("x != y : " + (x != y));
+    }
+
+#pragma warning disable 219
+    public static void AssignmentOperators() {
+      int x = 6;
+      string helloString = "Hello string.";
+      int y = x;
+      int z;
+      x = y = z = 25;
+      y = 4;
+      // Same as x = x * y;
+      x *= y;
+      // 8
+      Console.WriteLine(x);
+      // 8
+      Console.WriteLine(y *= 2);
+      // y=3 and z=3
+      z = y = 3;
+      // 3
+      Console.WriteLine(z);
+      // 7
+      Console.WriteLine(x |= 1);
+      // 10
+      Console.WriteLine(x += 3);
+      // 5
+      Console.WriteLine(x /= 2);
+    }
+#pragma warning restore 219
+
+    public static void ConditionalOperators() {
+      int a = 6;
+      int b = 4;
+      Console.WriteLine(a > b ? "a>b" : "b<=a");
+      // a>b
+      int num = a == b ? 1 : -1;
+      // num will have value -1
     }
   }
 }
