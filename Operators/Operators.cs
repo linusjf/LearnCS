@@ -9,6 +9,7 @@ namespace Intro {
       ComparisonOperators();
       AssignmentOperators();
       ConditionalOperators();
+      OtherOperators();
     }
 
     public static void MathOperators() {
@@ -129,10 +130,39 @@ namespace Intro {
     public static void ConditionalOperators() {
       int a = 6;
       int b = 4;
-      Console.WriteLine(a > b ? "a>b" : "b<=a");
       // a>b
-      int num = a == b ? 1 : -1;
+      Console.WriteLine(a > b ? "a>b" : "b<=a");
       // num will have value -1
+      int num = a == b ? 1 : -1;
+    }
+
+    public static void OtherOperators() {
+      // Prints the date + time
+      Console.WriteLine(DateTime.Now);
+      int[] arr = {1, 2, 3};
+      // 1
+      Console.WriteLine(arr[0]);
+      string str = "Hello";
+      // e
+      Console.WriteLine(str[1]);
+      int ? a = 5;
+      // 5
+      Console.WriteLine(a ?? - 1);
+      string name = null;
+      // (no name)
+      Console.WriteLine(name ?? "(no name)");
+      a = 6;
+      int b = 3;
+      Console.WriteLine(a + b / 2);    // 7
+      Console.WriteLine((a + b) / 2);  // 4
+      string s = "Beer";
+      Console.WriteLine(s is string);  // True
+      string notNullString = s;
+      string nullString = null;
+      // Unspecified
+      Console.WriteLine(nullString ?? "Unspecified");
+      // Beer
+      Console.WriteLine(notNullString ?? "Specified");
     }
   }
 }
