@@ -1,0 +1,145 @@
+#!/usr/bin/env bash
+
+######################################################################
+# @author      : Linus Fernandes (linusfernandes@gmail.com)
+# @file        : run
+# @created     : Sunday May 31, 2020 05:49:33 IST
+# @copyright   : Copyright (c) Linus Fernandes
+# @description : 
+######################################################################
+
+usage ()
+{
+  echo 'Usage: run <dir> <exe>'
+  echo 'dir - project directory. Must exist'
+  echo 'exe - full name of executable. Overrides contents of .main under project directory.'
+  exit 1
+}
+
+setUp ()
+{
+	cd "$proj" || \
+    { echo "Unable to access folder $proj";exit 1;}
+	[ -e "$setupScript" ] && \
+    { ./"$setupScript" || \
+      { \
+        echo "Error running setup script";\
+        exit 1;\
+      }\
+    }
+	cd ..
+}
+
+tests ()
+{
+	cd "$proj" || \
+    { echo "Unable to access folder $proj";exit 1;}
+	[ -e "$testsScript" ] && \
+    { ./"$testsScript" || \
+      { \
+        echo "Error running tests script";\
+        exit 1;\
+      }\
+    }
+	cd ..
+}
+
+tearDown ()
+{
+	cd "$proj" || \
+    { echo "Unable to access folder $proj";exit 1;}
+	[ -e "$teardownScript" ] && \
+    {\
+      ./"$teardownScript" || \
+      {\
+        echo "Error running teardown script";\
+        exit 1;\
+      }\
+    }
+	cd ..
+}
+
+displayBanner ()
+{
+  echo "$banner"
+}
+
+runExes()
+{
+  setUp
+  echo "Main executables: $main"
+  for a in "${main[@]}";
+  do
+    if [[ -z "$a" ]]
+    then
+      continue
+    fi
+    if [[ "$a" =~ ^#.* ]]
+    then
+      continue
+    fi
+    echo "Running $a...";echo
+    cd "$proj"
+    printf -v cmdPrefix '%q ' mono ${runOptions[@]}  
+    eval "$cmdPrefix $a" && cd .. || { cd ..; exit 1;}
+  done
+  tearDown;
+  if [[ ${#main[@]} > 1 ]]
+  then
+    tests;
+  fi
+  exit 0;
+}
+
+readBanner()
+{
+  [ -e "$proj/$bannerFile" ] && \
+      { banner=$(cat "$proj/$bannerFile") || \
+      echo "No banner file: $proj/$bannerFile";}
+}
+
+readRunOptions()
+{
+  [ -e "$proj/$runOptionsFile" ] && \
+      { readarray -t runOptions < <(cat "$proj"/"$runOptionsFile") || \
+      echo "Unable to read $proj/$runOptionsFile";}
+}
+
+declare -r setupScript="setup"
+declare -r testsScript="tests"
+declare -r teardownScript="teardown"
+declare -r nomainFile=".nomain"
+declare -r mainFile=".main"
+declare -a main
+proj="$1"
+if [ -z "$proj" ]
+  then
+    usage
+fi
+if [ -e "$proj/$nomainFile" ]
+  then
+    echo "$proj"
+    echo "Not an executable project."
+    exit 1
+fi
+
+declare -r bannerFile=".runbanner"
+declare -r runOptionsFile=".runoptions"
+declare -a runOptions
+banner=""
+if [ "$#" -ge 2 ]
+then
+  printf -v params "%s " "${@:2}"
+  main[0]="$params"
+else
+  readarray main < "$proj"/"$mainFile" || \
+    { echo "Error reading $proj/$mainFile";usage; }
+fi
+echo "$proj"
+readBanner
+readRunOptions
+
+displayBanner
+runExes
+
+usage
