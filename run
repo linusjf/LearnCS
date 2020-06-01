@@ -82,6 +82,7 @@ runExes()
     cd "$proj"
     printf -v cmdPrefix '%q ' mono ${runOptions[@]}  
     eval "$cmdPrefix $a" && cd .. || { cd ..; exit 1;}
+    echo
   done
   tearDown;
   if [[ ${#main[@]} > 1 ]]

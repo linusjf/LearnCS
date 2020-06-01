@@ -12,6 +12,7 @@ then
 fi
 
 declare -i res=0
+declare -r classesFile=".maincls"
 
 proj=$1
 
@@ -20,8 +21,18 @@ cd "$proj"
 printf -v findCmd '%q ' find . -type f -name '*.cs'
 readarray -t args < <(eval $findCmd)
 if [ ${#args[@]} -ne 0 ]; then
-  csc "${args[@]}"
-  res="$?"
+  if [ -e "$classesFile" ];
+  then
+    readarray -t classes < <(cat "$classesFile")
+    for class in "${classes[@]}";
+    do
+      csc "${args[@]}" -main:"$class"
+      res=("$?"+"$res")
+    done
+  else
+    csc "${args[@]}"
+    res="$?"
+  fi
 fi
 cd ..
 set -o noglob
