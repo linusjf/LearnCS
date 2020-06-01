@@ -39,6 +39,12 @@ namespace Intro {
       Console.WriteLine("{0,6}", 12);
       Console.Write("{0,-6}", 123);
       Console.WriteLine("--end");
+      DateTime d = new DateTime(2012, 02, 27, 17, 30, 22);
+      Console.WriteLine("{0:dd/MM/yyyy HH:mm:ss}", d);
+      Console.WriteLine("{0:d.MM.yy}", d);
+      Console.WriteLine("{0:G}", DayOfWeek.Wednesday);
+      Console.WriteLine("{0:D}", DayOfWeek.Wednesday);
+      Console.WriteLine("{0:X}", DayOfWeek.Wednesday);
     }
 
     public static void printConcat() {

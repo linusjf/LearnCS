@@ -1,3 +1,5 @@
 ConsoleExample.exe
 StandardNumericFormats.exe
 CustomNumericFormats.exe
+CultureInfoExample.exe
+UsingReadLine.exe < readline.txt
