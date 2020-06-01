@@ -41,14 +41,18 @@ namespace Intro {
       float actualHeight = (float) maxHeight;
       // Explicit
       float maxHeightFloat = (float) maxHeight;
-      // Compilation error!
+      // Compilation error if not cast!
       double d = 5e9d;
       // 5 * 10^9
       Console.WriteLine(d);
       // 5000000000
-      int i = checked((int) d);
-      // System.OverflowException
-      Console.WriteLine(i);
+      try {
+        int i = checked((int) d);
+        // System.OverflowException
+        Console.WriteLine(i);
+      } catch (System.OverflowException soe) {
+        Console.WriteLine("OverflowException caught");
+      }
       int a = 5;
       int b = 7;
       string sum = "Sum = " + (a + b);
