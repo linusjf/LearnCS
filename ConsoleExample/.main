@@ -4,3 +4,4 @@ CustomNumericFormats.exe
 CultureInfoExample.exe
 UsingReadLine.exe < readline.txt
 UsingRead.exe < readline2.txt
+ReadingNumbers.exe < readnums.txt
