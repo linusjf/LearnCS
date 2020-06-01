@@ -4,23 +4,23 @@ namespace Intro {
   public class Conversions {
     public static void Main(string[] args) {
       int myInt = 5;
+      // 5
       Console.WriteLine(myInt);
-      // 5
       long myLong = myInt;
-      Console.WriteLine(myLong);
       // 5
-      Console.WriteLine(myLong + myInt);
+      Console.WriteLine(myLong);
       // 10
+      Console.WriteLine(myLong + myInt);
       double myDouble = 5.1d;
-      Console.WriteLine(myDouble);
       // 5.1
-      myLong = (long) myDouble;
-      Console.WriteLine(myLong);
-      // 5
-      myDouble = 5e9d;
-      // 5 * 10^9
       Console.WriteLine(myDouble);
+      myLong = (long) myDouble;
+      // 5
+      Console.WriteLine(myLong);
+      // 5 * 10^9
+      myDouble = 5e9d;
       // 5000000000
+      Console.WriteLine(myDouble);
       myInt = (int) myDouble;
       Console.WriteLine(myInt);
       // -2147483648
@@ -42,10 +42,10 @@ namespace Intro {
       // Explicit
       float maxHeightFloat = (float) maxHeight;
       // Compilation error if not cast!
-      double d = 5e9d;
       // 5 * 10^9
-      Console.WriteLine(d);
+      double d = 5e9d;
       // 5000000000
+      Console.WriteLine(d);
       try {
         int i = checked((int) d);
         // System.OverflowException
