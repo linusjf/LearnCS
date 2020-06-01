@@ -51,7 +51,7 @@ namespace Intro {
         // System.OverflowException
         Console.WriteLine(i);
       } catch (System.OverflowException soe) {
-        Console.WriteLine("OverflowException caught");
+        Console.WriteLine("OverflowException caught: " + soe.Message);
       }
       int a = 5;
       int b = 7;
