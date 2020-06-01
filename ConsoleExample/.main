@@ -7,3 +7,4 @@ UsingRead.exe < readline2.txt
 ReadingNumbers.exe < readnums.txt
 ConditionalParsing.exe < readcond.txt
 CinExample.exe < cinput.txt
+PrintingLetter.exe < letter.txt
