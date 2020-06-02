@@ -22,6 +22,8 @@ declare -r reportanalyzer="-reportanalyzer"
 
 set +o noglob
 cd "$proj"
+echo "$proj"
+echo
 printf -v findCmd '%q ' find . -type f -name '*.cs'
 readarray -t args < <(eval $findCmd)
 if [ ${#args[@]} -ne 0 ]; then
