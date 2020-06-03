@@ -100,7 +100,7 @@ namespace Intro {
       Console.WriteLine("x != y : " + (x != y));
     }
 
-#pragma warning disable 219
+#pragma warning disable CS0219
     public static void AssignmentOperators() {
       int x = 6;
       string helloString = "Hello string.";
@@ -125,7 +125,7 @@ namespace Intro {
       // 5
       Console.WriteLine(x /= 2);
     }
-#pragma warning restore 219
+#pragma warning restore CS0219
 
     public static void ConditionalOperators() {
       int a = 6;
@@ -134,6 +134,7 @@ namespace Intro {
       Console.WriteLine(a > b ? "a>b" : "b<=a");
       // num will have value -1
       int num = a == b ? 1 : -1;
+      Console.WriteLine(num);
     }
 
     public static void OtherOperators() {

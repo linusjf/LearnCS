@@ -6,6 +6,13 @@ usage()
   exit 1
 }
 
+readBuildOptions()
+{
+  [ -e "$proj/$buildOptionsFile" ] && \
+    { buildOptions=$(cat "$proj"/"$buildOptionsFile") || \
+      echo "Unable to read $proj/$buildOptionsFile";}
+}
+
 if [ "$#" -ne 1 ] || ! [ -d "$1" ]; 
 then
   usage
@@ -19,7 +26,10 @@ declare -r nologo="-nologo"
 declare -r parallel="-parallel+"
 declare -r errorlog="-errorlog:"
 declare -r reportanalyzer="-reportanalyzer"
+declare -r buildOptionsFile=".buildoptions"
+buildOptions=""
 
+readBuildOptions
 set +o noglob
 cd "$proj"
 echo "$proj"
@@ -32,15 +42,15 @@ if [ ${#args[@]} -ne 0 ]; then
     readarray -t classes < <(cat "$classesFile")
     for class in "${classes[@]}";
     do
-      csc "${args[@]}" "$nologo" \
-        "$parallel" \
+      mcs "${args[@]}" "$nologo" \
+        "$buildOptions" \
         "$errorlog""$proj"".$class.errors" \
         "$reportanalyzer" -main:"$class"
       res=("$?"+"$res")
     done
   else
-    csc "${args[@]}" "$nologo" \
-      "$parallel" \
+    mcs "${args[@]}" "$nologo" \
+      "$buildOptions" \
       "$errorlog""$proj"".errors" \
       "$reportanalyzer" 
     res="$?"

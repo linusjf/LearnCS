@@ -35,12 +35,14 @@ namespace Intro {
       float heightInMeters = 1.74f;
       // Explicit conversion
       double maxHeight = heightInMeters;
+#pragma warning disable CS0219
       // Implicit
       double minHeight = (double) heightInMeters;
       // Explicit
       float actualHeight = (float) maxHeight;
       // Explicit
       float maxHeightFloat = (float) maxHeight;
+#pragma warning restore CS0219
       // Compilation error if not cast!
       // 5 * 10^9
       double d = 5e9d;
