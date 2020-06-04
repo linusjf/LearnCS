@@ -1,0 +1,2 @@
+-main:Intro.Prime -out:Prime.exe -target:exe
+-main:Intro.PrimeInterval -out:PrimeInterval.exe -target:exe

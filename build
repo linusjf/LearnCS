@@ -23,8 +23,6 @@ proj=$1
 declare -i res=0
 declare -r classesFile=".maincls"
 declare -r nologo="-nologo"
-declare -r parallel="-parallel+"
-declare -r errorlog="-errorlog:"
 declare -r reportanalyzer="-reportanalyzer"
 declare -r buildOptionsFile=".buildoptions"
 buildOptions=""
@@ -42,16 +40,15 @@ if [ ${#args[@]} -ne 0 ]; then
     readarray -t classes < <(cat "$classesFile")
     for class in "${classes[@]}";
     do
-      mcs "${args[@]}" "$nologo" \
-        "$buildOptions" \
-        "$errorlog""$proj"".$class.errors" \
-        "$reportanalyzer" -main:"$class"
+      cmd='mcs "${args[@]}" \
+        "$nologo" $buildOptions \
+        "$reportanalyzer" $class'
+      eval "$cmd"
       res=("$?"+"$res")
     done
   else
     mcs "${args[@]}" "$nologo" \
-      "$buildOptions" \
-      "$errorlog""$proj"".errors" \
+      $buildOptions \
       "$reportanalyzer" 
     res="$?"
   fi

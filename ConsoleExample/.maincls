@@ -1,12 +1,12 @@
-Intro.ConsoleExample
-Intro.StandardNumericFormats
-Intro.CustomNumericFormats
-Intro.CultureInfoExample
-Intro.UsingReadLine
-Intro.UsingRead
-Intro.ReadingNumbers
-Intro.ConditionalParsing
-Intro.Key
-Intro.CinExample
-Intro.PrintingLetter
-Intro.CalculatingArea
+-main:Intro.ConsoleExample -out:ConsoleExample.exe -target:exe
+-main:Intro.StandardNumericFormats -out:StandardNumericFormats.exe -target:exe
+-main:Intro.CustomNumericFormats -out:CustomNumericFormats.exe -target:exe
+-main:Intro.CultureInfoExample -out:CultureInfoExample.exe -target:exe
+-main:Intro.UsingReadLine -out:UsingReadLine.exe -target:exe
+-main:Intro.UsingRead -out:UsingRead.exe -target:exe
+-main:Intro.ReadingNumbers -out:ReadingNumbers.exe -target:exe
+-main:Intro.ConditionalParsing -out:ConditionalParsing.exe -target:exe
+-main:Intro.Key -out:Key.exe -target:exe
+-main:Intro.CinExample -out:CinExample.exe -target:exe
+-main:Intro.PrintingLetter -out:PrintingLetter.exe -target:exe
+-main:Intro.CalculatingArea -out:CalculatingArea.exe -target:exe
