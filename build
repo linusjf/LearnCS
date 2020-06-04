@@ -21,7 +21,7 @@ fi
 proj=$1
 
 declare -i res=0
-declare -r classesFile=".maincls"
+declare -r assemblyFile=".assemble"
 declare -r nologo="-nologo"
 declare -r reportanalyzer="-reportanalyzer"
 declare -r buildOptionsFile=".buildoptions"
@@ -35,14 +35,14 @@ echo
 printf -v findCmd '%q ' find . -type f -name '*.cs'
 readarray -t args < <(eval $findCmd)
 if [ ${#args[@]} -ne 0 ]; then
-  if [ -e "$classesFile" ];
+  if [ -e "$assemblyFile" ];
   then
-    readarray -t classes < <(cat "$classesFile")
-    for class in "${classes[@]}";
+    readarray -t assemblies < <(cat "$assemblyFile")
+    for assembly in "${assemblies[@]}";
     do
       cmd='mcs "${args[@]}" \
         "$nologo" $buildOptions \
-        "$reportanalyzer" $class'
+        "$reportanalyzer" $assembly'
       eval "$cmd"
       res=("$?"+"$res")
     done
