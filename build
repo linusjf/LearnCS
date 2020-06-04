@@ -23,7 +23,6 @@ proj=$1
 declare -i res=0
 declare -r assemblyFile=".assemble"
 declare -r nologo="-nologo"
-declare -r reportanalyzer="-reportanalyzer"
 declare -r buildOptionsFile=".buildoptions"
 buildOptions=""
 
@@ -40,16 +39,17 @@ if [ ${#args[@]} -ne 0 ]; then
     readarray -t assemblies < <(cat "$assemblyFile")
     for assembly in "${assemblies[@]}";
     do
-      cmd='mcs "${args[@]}" \
+      cmd='mcs \
         "$nologo" $buildOptions \
-        "$reportanalyzer" $assembly'
+        $assembly \
+        "${args[@]}"'
       eval "$cmd"
       res=("$?"+"$res")
     done
   else
-    mcs "${args[@]}" "$nologo" \
-      $buildOptions \
-      "$reportanalyzer" 
+    mcs \
+     "$nologo" $buildOptions \
+      "${args[@]}"
     res="$?"
   fi
 fi
